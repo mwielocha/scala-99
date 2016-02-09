@@ -63,7 +63,16 @@ object Scala99 {
 
 	def isPalindrome(in: List[Int]): Boolean = false
 
-	def flatten(in: List[Any]): List[Int] = Nil
+	def flatten(in: List[Any]): List[Int] = {
+
+		def _flatten(out: List[Int], in: List[Any]): List[Int] = in match {
+			case Nil => out
+			case (head: List[Any]) :: tail => _flatten(out ++ _flatten(Nil, head), tail)
+			case (head: Int) :: tail => _flatten(out :+ head, tail)
+		}
+
+		_flatten(Nil, in)
+	}
 
 	def compress(in: List[Symbol]): List[Symbol] = Nil
 
